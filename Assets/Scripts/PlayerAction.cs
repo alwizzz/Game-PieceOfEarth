@@ -40,15 +40,15 @@ public class PlayerAction : MonoBehaviour
                     {
                         GiveItemToHold((Item)interactable);
                     }
-                }
-                else if (type == "Collectable" && !isHolding)
+                } else if (type == "Collectable" && !isHolding)
                 {
                     ((Collectable)interactable).Collect();
+                } else if (type == "GreatTree" && !isHolding)
+                {
+                    ((GreatTree)interactable).Talk();
                 }
-            } else 
+            } else if (isHolding)
             {
-                print("test");
-                if (isHolding)
                 {
                     print("testtttt");
                     heldItem.Drop();
