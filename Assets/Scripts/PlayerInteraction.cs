@@ -37,4 +37,5 @@ public class PlayerInteraction : MonoBehaviour
     public Interactable GetTouchedInteractable() => touchedInteractable;
 
     public void SetIsTouching(bool value) { isTouching = value; }
+    public void SetNullTouchedInteractable() { touchedInteractable = null; } //TODO: bad implementation
 }

@@ -30,27 +30,26 @@ public class PlayerAction : MonoBehaviour
             {
                 var interactable = playerInteraction.GetTouchedInteractable();
                 var type = interactable.GetType().ToString();
-                if (type == "Item")
+                if (type == "Item" && !isHolding)
                 {
-                    if (isHolding)
-                    {
-
-                    }
-                    else
-                    {
-                        GiveItemToHold((Item)interactable);
-                    }
+                    GiveItemToHold((Item)interactable);
                 } else if (type == "Collectable" && !isHolding)
                 {
                     ((Collectable)interactable).Collect();
+                    playerInteraction.SetIsTouching(false);
+                    playerInteraction.SetNullTouchedInteractable();
                 } else if (type == "GreatTree" && !isHolding)
                 {
-                    ((GreatTree)interactable).Talk();
+                    ((GreatTree)interactable).Talk(playerMovement);
+                } else if(type == "Receiver" && isHolding)
+                {
+                    ((Receiver)interactable).TakeItemInHand(heldItem);
+                    heldItem = null;
+                    UpdateIsHolding();
                 }
             } else if (isHolding)
             {
                 {
-                    print("testtttt");
                     heldItem.Drop();
                     heldItem = null;
 

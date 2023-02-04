@@ -7,9 +7,9 @@ public class GameMaster : MonoBehaviour
     public enum ObjectiveState
     {
         FIRST_DIALOGUE,
-        FIRST_ROOT,
+        FIRST_ROOT, // cabut benalu
         SECOND_DIALOGUE,
-        SECOND_ROOT,
+        SECOND_ROOT, // buang sampah
         THIRD_DIALOGUE,
         PARENT_TREE
     }
