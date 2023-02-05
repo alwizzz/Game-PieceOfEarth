@@ -4,11 +4,6 @@ using UnityEngine;
 
 public class GameMaster : MonoBehaviour
 {
-    [SerializeField] Transform initialSpawnPoint;
-    [SerializeField] Transform fromRoot1SpawnPoint;
-    [SerializeField] Transform fromRoot2SpawnPoint;
-    //[SerializeField] Transform endSpawnPoint;
-    [SerializeField] static Transform currentSpawnPoint;
 
     public enum ObjectiveState
     {
@@ -17,38 +12,51 @@ public class GameMaster : MonoBehaviour
         SECOND_DIALOGUE,
         SECOND_ROOT, // buang sampah
         THIRD_DIALOGUE,
-        PARENT_TREE
+        FINISH
     }
 
-    public static ObjectiveState objState;
+    [SerializeField] public static ObjectiveState objState = ObjectiveState.FIRST_DIALOGUE;
 
     private void Awake()
     {
-        objState = ObjectiveState.FIRST_DIALOGUE;
-        DontDestroyOnLoad(this);
+        SingletonBehaviour();
 
-        print(objState);
 
-        currentSpawnPoint = initialSpawnPoint;
+        //objState = ObjectiveState.FIRST_DIALOGUE;
+        //DontDestroyOnLoad(this);
+
+        print("on awake: " + objState);
+
+        //currentSpawnPoint = initialSpawnPoint;
+    }
+
+    void SingletonBehaviour()
+    {
+        var thisScriptCount = FindObjectsOfType<GameMaster>().Length;
+        if (thisScriptCount > 1)
+        {
+            print("theres exist multiple");
+            gameObject.SetActive(false);
+            Destroy(gameObject);
+        }
+        else
+        {
+            print("the only one");
+            DontDestroyOnLoad(gameObject);
+        }
     }
 
     public static void ProgressObjectiveState()
     {
         objState++;
         print(objState);
-    }
 
-    public static Transform GetSpawnPoint() => currentSpawnPoint;
-
-    public void UpdateSpawnPoint()
-    {
-        if (objState <= ObjectiveState.SECOND_DIALOGUE)
+        if(objState == ObjectiveState.THIRD_DIALOGUE)
         {
-            currentSpawnPoint = fromRoot1SpawnPoint;
-        }
-        else if (objState <= ObjectiveState.THIRD_DIALOGUE)
-        {
-            currentSpawnPoint = fromRoot2SpawnPoint;
+            FindObjectOfType<AudioManager>().PlayEndSoundtrack();
         }
     }
+
+
+
 }

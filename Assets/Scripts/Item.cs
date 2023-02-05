@@ -5,6 +5,8 @@ using UnityEngine;
 public class Item : Interactable
 {
     [SerializeField] Transform itemGroup;
+    int itemCount = 0;
+    static int maxItem = 0;
 
     [SerializeField] private string codeName;
     public void MoveToPivot(Transform pivotObject)
@@ -19,6 +21,11 @@ public class Item : Interactable
     //    gameObject.SetActive(false);
     //    transform.parent = obj;
     //}
+    private void Start()
+    {
+        FindObjectOfType<Receiver>().IncrementMaxItem();
+        maxItem++;
+    }
 
     public string GetCodeName() => codeName;
 
@@ -27,6 +34,12 @@ public class Item : Interactable
         GetComponent<Collider>().enabled = true;
         transform.parent = itemGroup;
         transform.position = new Vector3(transform.position.x, itemGroup.position.y, transform.position.z);
+
+        itemCount++;
+        if(itemCount >= maxItem)
+        {
+            GameMaster.ProgressObjectiveState(); // go to THIRD_DIALOGUE state
+        }
     }
 
 }

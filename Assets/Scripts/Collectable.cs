@@ -6,8 +6,13 @@ public class Collectable : Interactable
 {
     [SerializeField] static bool validate;
     [SerializeField] static int collectableCount = 0;
-    [SerializeField] static int maxCollectable = 3;
+    [SerializeField] static int maxCollectable = 0;
 
+    private void Start()
+    {
+        maxCollectable++;
+        //print(maxCollectable);
+    }
     public void Collect()
     {
         if(validate && GameMaster.objState != GameMaster.ObjectiveState.FIRST_ROOT) 
@@ -15,6 +20,8 @@ public class Collectable : Interactable
             print("attempt to do FIRST_ROOT objective when not currently in that state");
             return;
         }
+        FindObjectOfType<AudioManager>().PlayPickupSFX();
+
         collectableCount++;
         print("collectableCount: " + collectableCount);
 

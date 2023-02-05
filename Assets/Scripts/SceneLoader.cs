@@ -6,20 +6,16 @@ using UnityEngine.SceneManagement;
 
 public class SceneLoader : MonoBehaviour
 {
-    [SerializeField] static GameMaster gameMaster;
-
-    private void Awake()
+    private void Update()
     {
-        gameMaster = null;
-        while(gameMaster == null)
+        if(Input.GetKeyDown(KeyCode.Backspace))
         {
-            gameMaster = FindObjectOfType<GameMaster>();
-            print("finding GameMaster...");
+            Application.Quit();
         }
     }
-    public static void LoadMainScene()
+
+    public static void LoadScene(string sceneName)
     {
-        gameMaster.UpdateSpawnPoint();
-        SceneManager.LoadScene("MainScene");
+        SceneManager.LoadScene(sceneName);
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [SerializeField] bool hasMultipleSpawnPoint = false;
+
     [SerializeField] GameObject playerBody;
     [SerializeField] float moveSpeed = 0.1f;
     [SerializeField] float rotateSpeed = 0.1f;
@@ -20,7 +22,10 @@ public class PlayerMovement : MonoBehaviour
 
         playerAnimator = playerBody.GetComponentInChildren<Animator>();
 
-        transform.position = GameMaster.GetSpawnPoint().position;
+        if (hasMultipleSpawnPoint) 
+        { 
+            transform.position = FindObjectOfType<SpawnPoint>().GetSpawnPoint().position; 
+        }
     }
 
     private void FixedUpdate()

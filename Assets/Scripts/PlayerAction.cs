@@ -33,19 +33,23 @@ public class PlayerAction : MonoBehaviour
                 if (type == "Item" && !isHolding)
                 {
                     GiveItemToHold((Item)interactable);
+                    FindObjectOfType<AudioManager>().PlayPickupSFX();
                 } else if (type == "Collectable" && !isHolding)
                 {
                     ((Collectable)interactable).Collect();
                     playerInteraction.SetIsTouching(false);
                     playerInteraction.SetNullTouchedInteractable();
+                    
                 } else if (type == "GreatTree" && !isHolding)
                 {
                     ((GreatTree)interactable).Talk(playerMovement);
+                    
                 } else if(type == "Receiver" && isHolding)
                 {
                     ((Receiver)interactable).TakeItemInHand(heldItem);
                     heldItem = null;
                     UpdateIsHolding();
+                    
                 }
             } else if (isHolding)
             {

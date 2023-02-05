@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 4153121379253773890}
   - component: {fileID: 4153121379253773901}
   - component: {fileID: 4153121379253773894}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: SceneWarper
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4153121379253773900}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -112,6 +112,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   requiredObjState: 1
+  targetScene:
+    m_Handle: 0
 --- !u!54 &4153121379253773894
 Rigidbody:
   m_ObjectHideFlags: 0

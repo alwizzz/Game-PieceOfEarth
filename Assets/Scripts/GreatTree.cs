@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GreatTree : Interactable
 {
+    [SerializeField] GameObject sickTreeGO;
+    [SerializeField] GameObject healthyTreeGO;
+
+
     [SerializeField] bool hasExhaustedDialogues;
     [SerializeField] bool isTalking;
     [SerializeField] List<string> currentDialogues;
@@ -18,21 +22,32 @@ public class GreatTree : Interactable
         "O, pain...",
         "O, great pain...",
         "One's body can't stop this withering",
-        "Oh, one's poor rootlings"
+        "Oh, one's poor lower rootlings"
 
     };
     List<string> secondDialogues = new List<string>
     {
         "One's pain.. it's been lifted slightly",
         "One's mind starts to recollect",
-        "One's rootlings.. they need one's aid..",
+        "One's upper rootlings.. they need aid..",
     };
     List<string> thirdDialogues = new List<string>
     {
-        "...",
-        "......",
-        "...........",
+        "Pain begoneth, one's feels energized",
+        "Thank you, two-legged creature. Thy saveth one and one's rootling",
+        //"...........",
     };
+
+    private void Awake()
+    {
+        if(GameMaster.objState == GameMaster.ObjectiveState.THIRD_DIALOGUE)
+        {
+            healthyTreeGO.SetActive(true);
+        } else
+        {
+            sickTreeGO.SetActive(true);
+        }
+    }
 
     private void Start()
     {
@@ -79,6 +94,7 @@ public class GreatTree : Interactable
             print("attempt to Talk when its already in isTalking state");
             return;
         }
+        FindObjectOfType<AudioManager>().PlayPickupSFX();
         EnterDialogueMode();
     }
 
