@@ -6,7 +6,6 @@ public class PlayerInteraction : MonoBehaviour
 {
     [SerializeField] bool isTouching;
     [SerializeField] Interactable touchedInteractable;
-    [SerializeField] PlayerAction playerAction;
 
     private void Start()
     {

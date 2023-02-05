@@ -15,21 +15,23 @@ public class GreatTree : Interactable
 
     List<string> firstDialogues = new List<string>
     { 
-        "first1",
-        "first2",
-        "first3",
+        "O, pain...",
+        "O, great pain...",
+        "One's body can't stop this withering",
+        "Oh, one's poor rootlings"
+
     };
     List<string> secondDialogues = new List<string>
     {
-        "second1",
-        "second2",
-        "second3",
+        "One's pain.. it's been lifted slightly",
+        "One's mind starts to recollect",
+        "One's rootlings.. they need one's aid..",
     };
     List<string> thirdDialogues = new List<string>
     {
-        "third1",
-        "third2",
-        "third3",
+        "...",
+        "......",
+        "...........",
     };
 
     private void Start()

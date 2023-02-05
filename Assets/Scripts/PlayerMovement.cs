@@ -11,28 +11,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] bool isMoving;
     [SerializeField] bool isAbleToMove;
 
-    [SerializeField] bool blockedForward;
-    [SerializeField] bool blockedBackward;
-    [SerializeField] bool blockedLeft;
-    [SerializeField] bool blockedRight;
-
-    //Rigidbody playerRigidbody;
     Animator playerAnimator;
-    //LevelMaster levelMaster;
 
     private void Start()
     {
-        blockedForward = false;
-        blockedBackward = false;
-        blockedLeft = false;
-        blockedRight = false;
-
         isMoving = false;
         isAbleToMove = true;
 
-        //playerRigidbody = playerBody.GetComponent<Rigidbody>();
         playerAnimator = playerBody.GetComponentInChildren<Animator>();
-        //levelMaster = FindObjectOfType<LevelMaster>();
+
+        transform.position = GameMaster.GetSpawnPoint().position;
     }
 
     private void FixedUpdate()
@@ -53,11 +41,6 @@ public class PlayerMovement : MonoBehaviour
         // continous movement
         var actualXValue = xValue;
         var actualZValue = zValue;
-
-        if (blockedForward && actualZValue > 0) { actualZValue = 0; }
-        if (blockedBackward && actualZValue < 0) { actualZValue = 0; }
-        if (blockedRight && actualXValue > 0) { actualXValue = 0; }
-        if (blockedLeft && actualXValue < 0) { actualXValue = 0; }
 
         var movementVector = new Vector3(
             xValue * moveSpeed * Time.fixedDeltaTime,
@@ -90,10 +73,6 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    public void SetBlockedForward(bool value) { blockedForward = value; }
-    public void SetBlockedBackward(bool value) { blockedBackward = value; }
-    public void SetBlockedLeft(bool value) { blockedLeft = value; }
-    public void SetBlockedRight(bool value) { blockedRight = value; }
     public void SetIsAbleToMove(bool value)
     {
         isAbleToMove = value;
